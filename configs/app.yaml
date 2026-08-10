@@ -1,0 +1,35 @@
+model:
+  path: "models/best.pt"
+  confidence: 0.45
+  iou: 0.50
+  image_size: 640
+  device: "0"  # NVIDIA GPU 通常设为 "0"
+
+classes:
+  person: "person"
+  helmet: "helmet"
+  no_helmet: "no_helmet"
+
+video:
+  source: "data/input/demo.mp4"  # 也可以是 0 或 RTSP URL
+  display: true
+  save_output: true
+  output_path: "data/output/result.mp4"
+
+tracking:
+  enabled: true
+  tracker: "bytetrack.yaml"
+
+region:
+  file: "configs/regions.json"
+  camera_id: "camera_01"
+
+rule:
+  head_ratio: 0.35
+  alarm_after_seconds: 1.5
+  clear_after_seconds: 1.0
+
+alarm:
+  output_dir: "runtime/alarms"
+  event_file: "runtime/alarms/events.jsonl"
+

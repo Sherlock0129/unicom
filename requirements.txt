@@ -1,0 +1,6 @@
+# PyTorch is already installed separately for the local CUDA/CPU environment.
+ultralytics>=8.3,<9
+opencv-python>=4.10,<5
+numpy>=1.26,<3
+PyYAML>=6.0,<7
+

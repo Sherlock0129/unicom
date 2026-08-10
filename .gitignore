@@ -1,0 +1,22 @@
+.idea/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Model weights and generated files
+models/*.pt
+models/*.onnx
+models/*.engine
+runtime/alarms/*
+runtime/logs/*
+data/input/*
+data/output/*
+data/
+
+!models/.gitkeep
+!runtime/alarms/.gitkeep
+!runtime/logs/.gitkeep
+!data/input/.gitkeep
+!data/output/.gitkeep
+

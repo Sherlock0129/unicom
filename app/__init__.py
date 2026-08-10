@@ -1,0 +1,2 @@
+"""Factory helmet detection application."""
+
