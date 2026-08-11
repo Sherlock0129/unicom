@@ -1,0 +1,23 @@
+source_images: data/datasets/helmet/images/val
+output: data/datasets/helmet_light
+
+classes:
+  - person
+  - helmet
+  - no_helmet
+  - hook
+
+splits:
+  train:
+    start: 0
+    end: 75
+    labels: data/labels/train
+  val:
+    start: 76
+    end: 90
+    labels: data/labels/validate
+  test:
+    start: 91
+    end: 105
+    labels: data/labels/test
+

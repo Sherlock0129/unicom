@@ -1,0 +1,7 @@
+# Tested Windows/Python 3.12 environment for this lightweight demo.
+# Install the matching PyTorch/torchvision CUDA build separately.
+ultralytics==8.3.0
+opencv-python>=4.8,<5
+numpy>=1.26,<2
+PyYAML>=6.0,<7
+
