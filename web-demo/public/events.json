@@ -1,0 +1,52 @@
+{
+  "camera": "CAM-01",
+  "duration": 60.0,
+  "rule": {
+    "name": "吊钩下方安全帽规则",
+    "horizontalPixels": 420.0,
+    "verticalPixels": 780.0,
+    "minDurationSeconds": 0.8
+  },
+  "events": [
+    {
+      "id": "ALM-001",
+      "start": 0.0,
+      "end": 0.8,
+      "level": "high",
+      "title": "吊钩作业区未佩戴安全帽",
+      "location": "一号吊装作业区",
+      "confidence": 0.91,
+      "hookConfidence": 0.6
+    },
+    {
+      "id": "ALM-002",
+      "start": 11.4,
+      "end": 40.0,
+      "level": "high",
+      "title": "吊钩作业区未佩戴安全帽",
+      "location": "一号吊装作业区",
+      "confidence": 0.93,
+      "hookConfidence": 0.91
+    },
+    {
+      "id": "ALM-003",
+      "start": 48.2,
+      "end": 49.2,
+      "level": "high",
+      "title": "吊钩作业区未佩戴安全帽",
+      "location": "一号吊装作业区",
+      "confidence": 0.84,
+      "hookConfidence": 0.84
+    },
+    {
+      "id": "ALM-004",
+      "start": 52.6,
+      "end": 59.8,
+      "level": "high",
+      "title": "吊钩作业区未佩戴安全帽",
+      "location": "一号吊装作业区",
+      "confidence": 0.94,
+      "hookConfidence": 0.89
+    }
+  ]
+}
