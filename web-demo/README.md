@@ -1,17 +1,24 @@
-# 联通智安 · 吊装作业安全监测 Demo
+# 联通智安网页演示
 
-这是对现有 YOLO11n 检测结果进行包装的演示网页，采用中国联通红白配色。页面播放已经完成识别标注的监控视频，并根据吊钩危险区规则展示实时告警。
+这是工厂吊装区域安全帽监测项目的 Web 展示层，使用 React、TypeScript 和 Vinext/Vite 构建，采用中国联通红白配色。
 
-## 安全规则
+## 快速启动
 
-- 吊钩下方及周边区域必须佩戴安全帽。
-- 同一帧中同时检测到 `hook` 与其危险区域内的 `no_helmet` 时，记为违规候选。
-- 违规持续至少 0.8 秒后生成高风险事件，避免单帧误检造成频繁告警。
-- 告警方式包括页面红色提示、提示音、浏览器系统通知和事件记录。
+推荐回到项目根目录，双击：
 
-## 启动演示网页
+```text
+start_web_demo.bat
+```
 
-需要 Node.js 22.13 或更高版本。在项目根目录执行：
+或在 PowerShell 中执行：
+
+```powershell
+.\scripts\start_web_demo.ps1
+```
+
+脚本会检查依赖和服务状态，后台启动网页，并自动打开 <http://localhost:3000>。
+
+手动启动方式：
 
 ```powershell
 cd web-demo
@@ -19,19 +26,16 @@ npm install
 npm run dev
 ```
 
-然后访问 <http://localhost:3000>。首次使用系统通知时，点击页面右上角“开启通知”并在浏览器中允许通知权限。
+## 页面能力
 
-## 生产构建
+- 播放 1 分钟 H.264 检测结果视频；
+- 按 `events.json` 中的时间区间同步显示红色高风险告警；
+- 展示吊钩危险区、安全帽状态、模型置信度和事件时间线；
+- 支持提示音、浏览器系统通知、告警跳转与人工确认；
+- 支持桌面和窄屏布局；
+- 提供中文告警字幕和键盘可访问控件。
 
-```powershell
-cd web-demo
-npm run lint
-npm run build
-```
-
-## 重新分析演示视频
-
-在项目根目录执行：
+网页只负责结果展示，YOLO 推理由根目录下的 Python 脚本完成。重新生成告警数据：
 
 ```powershell
 C:\Python\Python312\python.exe scripts\analyze_hook_safety.py `
@@ -40,20 +44,21 @@ C:\Python\Python312\python.exe scripts\analyze_hook_safety.py `
   --output web-demo\public\events.json
 ```
 
-常用规则参数：
+## 关键文件
 
-- `--horizontal 420`：吊钩左右方向危险区半径（像素）。
-- `--vertical 780`：吊钩下方危险区长度（像素）。
-- `--min-duration 0.8`：生成告警前的最短持续时间（秒）。
-- `--merge-gap 0.8`：允许合并的短暂漏检间隔（秒）。
-- `--conf 0.20`：模型最低置信度。
+- `app/page.tsx`：视频同步、告警状态、通知和事件交互；
+- `app/globals.css`：红白主题与响应式布局；
+- `app/layout.tsx`：页面及社交分享元数据；
+- `public/demo_result.mp4`：约 11.8 MB 的 H.264 演示视频；
+- `public/events.json`：4 个候选告警事件；
+- `public/captions-zh.vtt`：中文告警字幕。
 
-## 主要文件
+## 质量检查
 
-- `app/page.tsx`：监控大屏交互、视频同步、通知和告警事件。
-- `app/globals.css`：中国联通红白主题及响应式布局。
-- `public/demo_result.mp4`：H.264 网页版演示视频。
-- `public/events.json`：模型分析得到的告警时间段。
-- `../scripts/analyze_hook_safety.py`：吊钩危险区事件分析脚本。
+```powershell
+npm run lint
+npm run build
+npm audit --omit=dev
+```
 
-> 当前规则采用固定像素范围，适合本项目固定机位 Demo。实际部署时建议把危险区改为按画面比例或多边形 ROI 配置。
+当前生产依赖安全检查为 0 个已知漏洞。完整模型指标、数据集构成、演示结果和局限性请查看项目根目录的 `README.md`。
